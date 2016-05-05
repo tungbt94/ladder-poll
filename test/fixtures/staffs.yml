@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  manager_id: 1
+  email: 
+  key_person: 1
+  department: 
+  division: 
+  actived: false
+
+two:
+  id: 1
+  manager_id: 1
+  email: 
+  key_person: 1
+  department: 
+  division: 
+  actived: false
