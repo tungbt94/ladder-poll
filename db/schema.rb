@@ -38,12 +38,13 @@ ActiveRecord::Schema.define(version: 20160429044814) do
   create_table "staffs", force: :cascade do |t|
     t.integer  "manager_id"
     t.string   "email"
+    t.string   "name"
     t.integer  "key_person"
     t.string   "department"
     t.string   "division"
-    t.boolean  "actived"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "actived",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
