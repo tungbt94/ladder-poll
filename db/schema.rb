@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429044814) do
+ActiveRecord::Schema.define(version: 20160509095742) do
 
   create_table "options", force: :cascade do |t|
     t.integer  "poll_id"
@@ -42,9 +42,12 @@ ActiveRecord::Schema.define(version: 20160429044814) do
     t.integer  "key_person"
     t.string   "department"
     t.string   "division"
-    t.boolean  "actived",    default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "actived",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
   end
 
 end
