@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   	staff = Staff.from_omniauth(env["omniauth.auth"])
     session[:user_id] = staff.id
     if staff.actived == false
-    	redirect_to edit_path
+    	redirect_to staffs_edit_path
     else
-    	redirect_to home_path
+    	redirect_to static_pages_home_path
     end
   end
 

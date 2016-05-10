@@ -12,7 +12,7 @@ class StaffsController < ApplicationController
     # Handle a successful update.
       @staff.update_attributes(actived: true)
       flash[:success] = "Profile updated"
-      redirect_to show_path
+      redirect_to staffs_show_path
     else
      render 'edit'
     end
