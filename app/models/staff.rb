@@ -6,7 +6,7 @@ class Staff < ActiveRecord::Base
                     #format: { with: VALID_EMAIL_REGEX },
                     #uniqueness: { case_sensitive: false }
    	def self.from_omniauth(auth)
-		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
+		  where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
 	      staff.provider = auth.provider
 	      staff.uid = auth.uid
 	      staff.name = auth.info.name
