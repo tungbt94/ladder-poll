@@ -1,18 +1,28 @@
 Rails.application.routes.draw do
 
-  get 'sessions/create'
+  get 'polls/show'
 
-  get 'sessions/destroy'
+  get 'polls/new'
+
+  get 'polls/update'
+
+  get 'staffs/view'
+
 
   root to: "static_pages#welcome"
 
   resources :sessions, only: [:create, :destroy]
   resources :static_pages, only: [:welcome]
+  resources :staffs
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'logout', to: 'sessions#destroy'
 
+  get 'home', to: 'static_pages#home'
+
+  get 'edit', to: 'staffs#edit'
+  get 'show', to: 'staffs#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
