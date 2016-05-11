@@ -14,4 +14,5 @@ class Staff < ActiveRecord::Base
 	      staff.save!
 	  	end
 	end
+
 end
