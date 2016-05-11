@@ -16,24 +16,43 @@ class Staff < ActiveRecord::Base
 	end
 
   # get manager_level of staff
-    def get_manager_level
-      @manager_level = 1
-      staffs = Staff.where(:manager_id => self.id)
-      if(staffs)
-        @manager_level = Staff.max_manager_level(staffs) + 1
-      end
-      return @manager_level
+  def get_manager_level
+    @manager_level = 1
+    staffs = Staff.where(:manager_id => self.id)
+    if(staffs)
+      @manager_level = Staff.max_manager_level(staffs) + 1
     end
+    return @manager_level
+  end
 
   # get max manager_level of array staff
-    def self.max_manager_level(staffs)
-      max_manager_level = 0
-      staffs.each do |staff|
-        staff_level = staff.get_manager_level
-        if max_manager_level < staff_level
-          max_manager_level = staff_level
-        end
+  def self.max_manager_level(staffs)
+    max_manager_level = 0
+    staffs.each do |staff|
+      staff_level = staff.get_manager_level
+      if max_manager_level < staff_level
+        max_manager_level = staff_level
       end
-      return max_manager_level
     end
+    return max_manager_level
+  end
+
+  # get score of staff
+  def get_score
+    sum_score = 0
+    staffs = Staff.where(:manager_id => self.id)
+    if(staffs)
+      sum_score = Staff.get_sum_score(staffs)
+    end
+    @score = get_manager_level + self.key_person + Math.log(sum_score + 1, Math::E)
+  end
+
+  #get sum_score of array staff
+  def self.get_sum_score(staffs)
+    sum_score = 0
+    staffs.each do |staff|
+      sum_score += staff.get_score
+    end
+    return sum_score
+  end
 end
