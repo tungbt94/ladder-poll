@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509095742) do
+ActiveRecord::Schema.define(version: 20160511033624) do
 
   create_table "options", force: :cascade do |t|
     t.integer  "poll_id"
@@ -20,12 +20,16 @@ ActiveRecord::Schema.define(version: 20160509095742) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "options", ["id"], name: "index_options_on_id"
+
   create_table "polls", force: :cascade do |t|
     t.string   "content"
     t.integer  "stadd_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "polls", ["id"], name: "index_polls_on_id", unique: true
 
   create_table "staff_polls", force: :cascade do |t|
     t.integer  "staff_id"
@@ -49,5 +53,7 @@ ActiveRecord::Schema.define(version: 20160509095742) do
     t.string   "uid"
     t.string   "oauth_token"
   end
+
+  add_index "staffs", ["id"], name: "index_staffs_on_id", unique: true
 
 end
