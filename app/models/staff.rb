@@ -15,4 +15,25 @@ class Staff < ActiveRecord::Base
 	  	end
 	end
 
+  # get manager_level of staff
+    def get_manager_level
+      @manager_level = 1
+      staffs = Staff.where(:manager_id => self.id)
+      if(staffs)
+        @manager_level = Staff.max_manager_level(staffs) + 1
+      end
+      return @manager_level
+    end
+
+  # get max manager_level of array staff
+    def self.max_manager_level(staffs)
+      max_manager_level = 0
+      staffs.each do |staff|
+        staff_level = staff.get_manager_level
+        if max_manager_level < staff_level
+          max_manager_level = staff_level
+        end
+      end
+      return max_manager_level
+    end
 end
