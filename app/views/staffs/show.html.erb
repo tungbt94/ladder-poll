@@ -1,2 +1,12 @@
-<h1>Staffs#show</h1>
-<p>Find me in app/views/staffs/show.html.erb</p>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @staff %>
+        <%= @staff.name %>, <%= @staff.email %>
+      </h1>
+      <h4><%= @staff.department %></h2>
+	  <h4><%= @staff.division %></h3>
+    </section>
+  </aside>
+</div>

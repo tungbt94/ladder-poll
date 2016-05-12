@@ -7,7 +7,12 @@
   </h2>
   	<% if current_staff %>
 		Singed in as <strong><%= current_staff.name %></strong>!
-		<%= link_to "Sign out", logout_path, class: "btn btn-lg btn-primary" %>
+      <% if current_staff_actived? %>
+		    <%= link_to "Create new poll!", polls_new_path, class: "btn btn-primary" %> or 
+        <%= link_to "Vote poll!", polls_show_path, class: "btn btn-primary" %>
+      <% else %>
+        Your account is not active, go to<%= link_to "Settings", staffs_edit_path, class: "btn btn-link" %>to active account!
+      <% end %>
 	<% else %>
   		<%= link_to "Sign in now!", "/auth/google_oauth2" , id: "sign_in", class: "btn btn-lg btn-primary" %>
   	<% end %>

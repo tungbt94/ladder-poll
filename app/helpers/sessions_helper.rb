@@ -9,6 +9,13 @@ module SessionsHelper
 	   @current_staff ||= Staff.find(session[:user_id]) if session[:user_id]
 	 end
 
+	 def current_staff_actived?
+	 	current_staff.actived?
+	 end
+
+	 def current_manager?
+	 	
+	 end
 	 # Returns true if the user is logged in, false otherwise.
 	 def logged_in?
 	   !current_staff.nil?

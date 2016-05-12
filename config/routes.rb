@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'polls/show'
-
-  get 'polls/new'
-
-  get 'polls/update'
-
-  get 'staffs/view'
-
 
   root to: "static_pages#welcome"
 
@@ -23,7 +15,12 @@ Rails.application.routes.draw do
 
   get 'staffs_edit', to: 'staffs#edit'
   get 'staffs_show', to: 'staffs#show'
-  # The priority is based upon order of creation: first created -> highest priority.
+
+
+  get 'polls_new', to: 'polls#new'
+  get 'polls_show', to: 'polls#show'
+  get 'polls_update', to: 'polls#update'
+ # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
