@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511033624) do
+ActiveRecord::Schema.define(version: 20160512040050) do
 
   create_table "options", force: :cascade do |t|
     t.integer  "poll_id"
     t.float    "sum_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "content"
   end
 
   add_index "options", ["id"], name: "index_options_on_id"
 
   create_table "polls", force: :cascade do |t|
-    t.string   "content"
-    t.integer  "stadd_id"
+    t.string   "content",    null: false
+    t.integer  "staff_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
