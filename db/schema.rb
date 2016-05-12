@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160512040050) do
 
   create_table "options", force: :cascade do |t|
     t.integer  "poll_id"
-    t.float    "sum_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "content"

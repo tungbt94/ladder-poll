@@ -64,4 +64,8 @@ class Staff < ActiveRecord::Base
     end
     return sum_score
   end
+
+  #get voted poll
+  def get_voted_poll
+  end
 end

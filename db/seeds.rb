@@ -1,10 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# bundle exec rake db:drop
+# bundle exec rake db:migrate
+# bundle exec rake db:seed
 Staff.create!(
   id: 1,
   manager_id: 0,
@@ -128,3 +125,43 @@ Staff.create!(
   uid: "",
   oauth_token: "",
 )
+
+50.times do |i|
+  id = i
+  content = "vote #{i}"
+  staff_id = Faker::Number.between(1, 9)
+  Poll.create!(
+    id: id,
+    content: content,
+    staff_id: staff_id
+  )
+end
+
+9.times do |i|
+  staff_id = i
+  count = Faker::Number.between(0,50)
+  count.times do
+    poll_id = Faker::Number.between(0, 49)
+    StaffPoll.create!(
+      staff_id: staff_id,
+      poll_id: poll_id,
+      option_id: 0
+    )
+  end
+end
+
+option_id = 0
+50.times do |i|
+  poll_id   = i
+  number_option = Faker::Number.between(0, 5)
+  number_option.times do |n|
+    Option.create!(
+      id: option_id,
+      poll_id: poll_id,
+      content: Faker::Lorem.sentence(3),
+      created_at: "",
+      updated_at: ""
+    )
+    option_id += 1
+  end
+end
