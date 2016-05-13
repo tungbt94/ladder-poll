@@ -10,6 +10,9 @@ class Staff < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }, allow_nil: true
+
+  validates :validate_domain, on: :create
+
    	def self.from_omniauth(auth)
 		  where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
 	      staff.provider = auth.provider
@@ -68,4 +71,9 @@ class Staff < ActiveRecord::Base
   #get voted poll
   def get_voted_poll
   end
+
+  private
+  # def validate_domain
+  #   self.email.split("@")
+  # end
 end
