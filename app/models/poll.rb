@@ -12,4 +12,8 @@ class Poll < ActiveRecord::Base
     return list_staff
   end
 
+  def get_list_option
+    list_option = Option.where(:poll_id => self.id)
+  end
+
 end
