@@ -11,7 +11,7 @@ class Staff < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }, allow_nil: true
 
-  validates :validate_domain, on: :create
+  # validates :validate_domain, on: :create
 
    	def self.from_omniauth(auth)
 		  where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
@@ -37,6 +37,42 @@ class Staff < ActiveRecord::Base
     return @manager_level
   end
 
+  # get score of staff
+  def get_score
+    sum_score = 0
+    staffs = Staff.where(:manager_id => self.id)
+    if(staffs)
+      sum_score = Staff.get_sum_score(staffs)
+    end
+    @score = get_manager_level + self.key_person + Math.log(sum_score + 1, Math::E)
+  end
+
+  #get voted poll
+  def get_voted_poll
+    list_staff_poll = StaffPoll.where(:staff_id => self.id)
+    list_voted_poll = Array.new
+    list_staff_poll.each do |staff_poll|
+      poll = Poll.find(staff_poll.poll_id)
+      list_voted_poll.push(poll)
+    end
+    return list_voted_poll.size
+  end
+
+  #check another staff is managed
+  def is_managing(id)
+    staff = Staff.find(id)
+    if(staff)
+      return get_staff_in_branch.include?(staff)
+    end
+    return false
+  end
+
+
+  private
+  # def validate_domain
+  #   self.email.split("@")
+  # end
+
   # get max manager_level of array staff
   def self.max_manager_level(staffs)
     max_manager_level = 0
@@ -49,16 +85,6 @@ class Staff < ActiveRecord::Base
     return max_manager_level
   end
 
-  # get score of staff
-  def get_score
-    sum_score = 0
-    staffs = Staff.where(:manager_id => self.id)
-    if(staffs)
-      sum_score = Staff.get_sum_score(staffs)
-    end
-    @score = get_manager_level + self.key_person + Math.log(sum_score + 1, Math::E)
-  end
-
   #get sum_score of array staff
   def self.get_sum_score(staffs)
     sum_score = 0
@@ -68,12 +94,14 @@ class Staff < ActiveRecord::Base
     return sum_score
   end
 
-  #get voted poll
-  def get_voted_poll
+  #get all staff are managed by this staff
+  def get_staff_in_branch
+    staffs = Staff.where(:manager_id => self.id)
+    if(staffs)
+      staffs.each do |staff|
+        staff.get_staff_in_branch
+      end
+    end
+    return staffs
   end
-
-  private
-  # def validate_domain
-  #   self.email.split("@")
-  # end
 end
