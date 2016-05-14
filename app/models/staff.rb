@@ -24,7 +24,12 @@ class Staff < ActiveRecord::Base
 	end
 
 	def set_active
-		staff.update_attributes(actived: true)
+		# self.update_attributes(actived: true)
+    if(!self.actived)
+      self.update_attributes(actived: true)
+    else
+      return false
+    end
 	end
 
   # get manager_level of staff
