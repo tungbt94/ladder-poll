@@ -7,13 +7,13 @@ RSpec.describe Poll, :type => :model do
   end
   describe ".get_list_option" do
     context "no option" do
-      it "return 0" do
+      it "return 0 option" do
         expect(@poll_2.get_list_option.size).to eq 0
       end
     end
 
     context "have option" do
-      it "return not 0" do
+      it "return != 0 option" do
         expect(@poll_1.get_list_option.size).to eq 1
       end
     end
@@ -21,13 +21,13 @@ RSpec.describe Poll, :type => :model do
 
   describe ".get_list_staff_voted" do
     context "no vote" do
-      it "return 0" do
+      it "return 0 staff" do
           expect(@poll_2.get_list_staff_voted.size).to eq 0
       end
     end
 
     context "voted" do
-      it "return not 0" do
+      it "return != 0 staff" do
           expect(@poll_1.get_list_staff_voted.size).to eq 1
       end
     end

@@ -13,14 +13,14 @@ class Staff < ActiveRecord::Base
 
   # validates :validate_domain, on: :create
 
-   	def self.from_omniauth(auth)
-		  where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
-	      staff.provider = auth.provider
-	      staff.uid = auth.uid
-	      staff.name = auth.info.name
-	      staff.oauth_token = auth.credentials.token
-	      staff.save!
-	  	end
+  def self.from_omniauth(auth)
+		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
+	    staff.provider = auth.provider
+	    staff.uid = auth.uid
+	    staff.name = auth.info.name
+	    staff.oauth_token = auth.credentials.token
+	    staff.save!
+	  end
 	end
 
 	def set_active
