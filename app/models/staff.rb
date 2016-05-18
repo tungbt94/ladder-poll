@@ -68,7 +68,7 @@ class Staff < ActiveRecord::Base
     if(id != 0 && id != nil)
       staff = Staff.find(id)
       if(staff)
-        return Staff.get_staff_in_branch(self.id).include?(staff)
+        return get_branch.include?(staff)
       end
     end
     return false
@@ -76,35 +76,35 @@ class Staff < ActiveRecord::Base
 
   #get all staff are managed by this staff
   def get_branch
-    staffs = Staff.where(:manager_id => self.id)
-    list_staff_in_branch = staffs
-    if list_staff_in_branch.size == 0
-      puts "size = 0"
-      return list_staff_in_branch
-    else
-      if Staff.max_manager_level(staffs) == 1
-        return list_staff_in_branch
-      else
-        list_staff_in_branch.push(Staff.get_all_staff_from_list(staffs))
-        return list_staff_in_branch
-      end
+    staffs = Staff.get_staffs_managed_by(self.id)
+    list_staff_in_branch = Array.new
+    # make stack
+    stack_staff_to_check = Array.new
+    staffs.each do |staff|
     end
-
+    # get all staff
+    while(stack_staff_to_check.size != 0) do
+      staff_id = stack_staff_to_check.pop
+      list_staff_in_branch.push(Staff.find(staff_id))
+      if(list_staff_managed.size > 0)
+        list_staff_managed.each do |staff|
+          puts "staff id: #{staff.id}"
+          stack_staff_to_check.push(staff.id)
+        end
+      end
+      puts "stack size = stack_staff_to_check.size"
+    end
+    return list_staff_in_branch
   end
+
+  scope :get_staffs_managed_by, lambda {|id|
+    where(["manager_id LIKE ?", "%#{id}%"])
+  }
 
   private
   # def validate_domain
   #   self.email.split("@")
   # end
-
-  def self.get_all_staff_from_list(staffs)
-    list_staff_in_branch = Array.new
-    staffs.each do |staff|
-      list_staff_in_branch.push(staff.get_branch)
-    end
-    # puts "list #{list_staff_in_branch.size}"
-    return list_staff_in_branch
-  end
 
   # get max manager_level of array staff
   def self.max_manager_level(staffs)

@@ -93,4 +93,112 @@ RSpec.describe Staff, type: :model do
       end
     end
   end
+
+  describe " get_branch" do
+    context "new staff" do
+      it "return 0 staff" do
+        expect(@staff.get_branch.size).to eq 0
+      end
+    end
+
+    context "manager_level = 1" do
+      it "return 0 staff" do
+        expect(@staff_2.get_branch.size).to eq 0
+      end
+    end
+
+    context "manager_level = 2" do
+      staff = Staff.find(4)
+      it "return > 1 staff" do
+        expect(staff.get_branch.size > 1).to eq true
+      end
+    end
+
+    context "manager_level > 2" do
+      it "return > 1 staff" do
+        expect(@staff_1.get_branch.size > 1).to eq true
+      end
+    end
+  end
+
+  describe " scope get_staffs_managed_by" do
+    context "id = nil" do
+      it "return all staff" do
+        expect(Staff.get_staffs_managed_by(@staff.id).size).to eq Staff.all.size
+      end
+    end
+
+    context "manager_level = 1" do
+      it "return 0 staff" do
+        expect(Staff.get_staffs_managed_by(@staff_2.id).size == 0).to eq true
+      end
+    end
+
+    context "manager_level > 1" do
+      it "return > 0 staff" do
+        expect(Staff.get_staffs_managed_by(@staff_1.id).size > 0).to eq true
+      end
+    end
+  end
+
+  describe " self.max_manager_level" do
+    context "all is new staff" do
+      staff = Staff.new
+      staff_1 = Staff.new
+      list_staff = Array.new
+      list_staff.push(staff)
+      list_staff.push(staff_1)
+      it "return 1" do
+        expect(Staff.max_manager_level(list_staff)).to eq 1
+      end
+    end
+
+    context "all staff have the same manager_level" do
+      staff = Staff.find(8)
+      staff_1 = Staff.find(4)
+      list_staff = Array.new
+      list_staff.push(staff)
+      list_staff.push(staff_1)
+      it "return same manager_level" do
+        expect(Staff.max_manager_level(list_staff)).to eq staff.get_manager_level
+      end
+    end
+
+    context "have difference manager_level" do
+      staff = Staff.find(8)
+      staff_1 = Staff.find(9)
+      list_staff = Array.new
+      list_staff.push(staff)
+      list_staff.push(staff_1)
+      it "return max manager_level" do
+        expect(Staff.max_manager_level(list_staff)).to eq staff.get_manager_level
+      end
+    end
+  end
+
+  describe " .get_sum_score" do
+    context "all is new staff" do
+      staff = Staff.new
+      staff_1 = Staff.new
+      list_staff = Array.new
+      list_staff.push(staff)
+      list_staff.push(staff_1)
+      it "result >= 1 * number staff" do
+        expect(Staff.get_sum_score(list_staff) >= 2).to eq true
+      end
+    end
+
+    context "all is staff actived" do
+      staff = Staff.find(8)
+      staff_1 = Staff.find(4)
+      list_staff = Array.new
+      list_staff.push(staff)
+      list_staff.push(staff_1)
+      sum_score = staff.get_score + staff_1.get_score
+      it "result = sum key" do
+        expect(Staff.get_sum_score(list_staff)).to eq sum_score
+      end
+    end
+  end
+
 end
