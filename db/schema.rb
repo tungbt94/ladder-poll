@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 20160512040050) do
   end
 
   create_table "staffs", force: :cascade do |t|
-    t.integer  "manager_id"
+    t.integer  "manager_id",  default: 0
     t.string   "email"
     t.string   "name"
-    t.integer  "key_person"
+    t.integer  "key_person",  default: 0
     t.string   "department"
     t.string   "division"
     t.boolean  "actived",     default: false

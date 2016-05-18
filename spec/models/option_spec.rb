@@ -29,7 +29,7 @@ RSpec.describe Option, :type => :model do
 
     context "have staff voted" do
       it "return != 0 score" do
-        expect(@option_1.get_sum_score.to_i).to eq 19
+        expect(@option_1.get_sum_score.to_i.equal?(0)).to eq false
       end
     end
   end

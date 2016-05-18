@@ -90,7 +90,7 @@ Staff.create!(
   manager_id: 4,
   email: "G@vcc.com",
   name: "G",
-  key_person: "1",
+  key_person: "0",
   department: "vccloud",
   division: "solution",
   actived: true,

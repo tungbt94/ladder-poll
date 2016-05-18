@@ -34,12 +34,12 @@ class Staff < ActiveRecord::Base
 
   # get manager_level of staff
   def get_manager_level
-    @manager_level = 1
+    manager_level = 1
     staffs = Staff.where(:manager_id => self.id)
     if(staffs)
-      @manager_level = Staff.max_manager_level(staffs) + 1
+      manager_level = Staff.max_manager_level(staffs) + 1
     end
-    return @manager_level
+    return manager_level
   end
 
   # get score of staff
@@ -60,23 +60,51 @@ class Staff < ActiveRecord::Base
       poll = Poll.find(staff_poll.poll_id)
       list_voted_poll.push(poll)
     end
-    return list_voted_poll.size
+    return list_voted_poll
   end
 
   #check another staff is managed
   def is_managing(id)
-    staff = Staff.find(id)
-    if(staff)
-      return get_staff_in_branch.include?(staff)
+    if(id != 0 && id != nil)
+      staff = Staff.find(id)
+      if(staff)
+        return Staff.get_staff_in_branch(self.id).include?(staff)
+      end
     end
     return false
   end
 
+  #get all staff are managed by this staff
+  def get_branch
+    staffs = Staff.where(:manager_id => self.id)
+    list_staff_in_branch = staffs
+    if list_staff_in_branch.size == 0
+      puts "size = 0"
+      return list_staff_in_branch
+    else
+      if Staff.max_manager_level(staffs) == 1
+        return list_staff_in_branch
+      else
+        list_staff_in_branch.push(Staff.get_all_staff_from_list(staffs))
+        return list_staff_in_branch
+      end
+    end
+
+  end
 
   private
   # def validate_domain
   #   self.email.split("@")
   # end
+
+  def self.get_all_staff_from_list(staffs)
+    list_staff_in_branch = Array.new
+    staffs.each do |staff|
+      list_staff_in_branch.push(staff.get_branch)
+    end
+    # puts "list #{list_staff_in_branch.size}"
+    return list_staff_in_branch
+  end
 
   # get max manager_level of array staff
   def self.max_manager_level(staffs)
@@ -97,16 +125,5 @@ class Staff < ActiveRecord::Base
       sum_score += staff.get_score
     end
     return sum_score
-  end
-
-  #get all staff are managed by this staff
-  def get_staff_in_branch
-    staffs = Staff.where(:manager_id => self.id)
-    if(staffs)
-      staffs.each do |staff|
-        staff.get_staff_in_branch
-      end
-    end
-    return staffs
   end
 end
