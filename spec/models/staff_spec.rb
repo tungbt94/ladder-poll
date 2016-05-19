@@ -96,8 +96,8 @@ RSpec.describe Staff, type: :model do
 
   describe " get_branch" do
     context "new staff" do
-      it "return 0 staff" do
-        expect(@staff.get_branch.size).to eq 0
+      it "return nil" do
+        expect(@staff.get_branch).to eq nil
       end
     end
 

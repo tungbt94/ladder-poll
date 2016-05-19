@@ -76,30 +76,40 @@ class Staff < ActiveRecord::Base
 
   #get all staff are managed by this staff
   def get_branch
-    staffs = Staff.get_staffs_managed_by(self.id)
-    list_staff_in_branch = Array.new
-    # make stack
-    stack_staff_to_check = Array.new
-    staffs.each do |staff|
-    end
-    # get all staff
-    while(stack_staff_to_check.size != 0) do
-      staff_id = stack_staff_to_check.pop
-      list_staff_in_branch.push(Staff.find(staff_id))
-      if(list_staff_managed.size > 0)
-        list_staff_managed.each do |staff|
-          puts "staff id: #{staff.id}"
-          stack_staff_to_check.push(staff.id)
-        end
+    if id != nil
+      staffs = Staff.get_staffs_managed_by(self.id)
+      list_staff_in_branch = Array.new
+      # make stack
+      stack_staff_to_check = Array.new
+      staffs.each do |staff|
+        stack_staff_to_check.push(staff.id)
       end
-      puts "stack size = stack_staff_to_check.size"
+      # get all staff
+      while(stack_staff_to_check.size != 0) do
+        staff_id = stack_staff_to_check.pop
+        list_staff_in_branch.push(Staff.find(staff_id))
+        list_staff_managed = Staff.get_staffs_managed_by(staff_id)
+        if(list_staff_managed.size > 0)
+          list_staff_managed.each do |staff|
+            puts "staff id: #{staff.id}"
+            stack_staff_to_check.push(staff.id)
+          end
+        end
+        puts "stack size = stack_staff_to_check.size"
+      end
+      return list_staff_in_branch
+    else
+      return nil
     end
-    return list_staff_in_branch
   end
 
   scope :get_staffs_managed_by, lambda {|id|
     where(["manager_id LIKE ?", "%#{id}%"])
   }
+
+  # def self.get_staffs_managed_by(id)
+  #   return Staff.where(:manager_id => id)
+  # end
 
   private
   # def validate_domain
