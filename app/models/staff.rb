@@ -65,7 +65,7 @@ class Staff < ActiveRecord::Base
 
   #check another staff is managed
   def is_managing(id)
-    if(id != 0 && id != nil)
+    if(self.id != nil && id != 0 && id != nil)
       staff = Staff.find(id)
       if(staff)
         return get_branch.include?(staff)
@@ -91,11 +91,9 @@ class Staff < ActiveRecord::Base
         list_staff_managed = Staff.get_staffs_managed_by(staff_id)
         if(list_staff_managed.size > 0)
           list_staff_managed.each do |staff|
-            puts "staff id: #{staff.id}"
             stack_staff_to_check.push(staff.id)
           end
         end
-        puts "stack size = stack_staff_to_check.size"
       end
       return list_staff_in_branch
     else
