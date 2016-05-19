@@ -76,7 +76,7 @@ class Staff < ActiveRecord::Base
 
   #get all staff are managed by this staff
   def get_branch
-    if id != nil
+    if self.id != nil
       staffs = Staff.get_staffs_managed_by(self.id)
       list_staff_in_branch = Array.new
       # make stack
