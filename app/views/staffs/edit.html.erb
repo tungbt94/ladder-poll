@@ -9,6 +9,9 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
+      <%= f.label "manager\'s email:" %>
+      <%= f.email_field :manager_id, value:"", class: 'form-control' %>
+
       <%= f.label :department %>
       <%= f.text_field :department, class: 'form-control' %>
 
@@ -19,5 +22,6 @@
 
       <%= link_to "Skip", "#" , class: "btn btn-link" %>
     <% end %>
+
   </div>
 </div>

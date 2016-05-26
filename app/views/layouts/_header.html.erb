@@ -5,10 +5,10 @@
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
           <li>
-            <%= link_to "Account", staffs_show_path %>
+            <%= link_to "Staff", staff_index_path %>
           </li>
           <li>
-            <%= link_to "Settings", staffs_edit_path %>
+            <%= link_to "Settings", staff_edit_path %>
           </li>
           <li>
             <%= link_to "Log out", logout_path %>

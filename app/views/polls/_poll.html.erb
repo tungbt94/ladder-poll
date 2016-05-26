@@ -1,0 +1,5 @@
+<li>
+  <%= link_to poll.content, poll %>
+  <% author = Staff.find(poll.staff_id)%>
+  <%= link_to author.name, author%>
+</li>

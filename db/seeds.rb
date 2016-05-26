@@ -5,7 +5,7 @@
 Staff.create!(
   id: 1,
   manager_id: 0,
-  email: "A@vcc.com",
+  email: "A@vcc.vn",
   name: "A",
   key_person: "4",
   department: "vcc",
@@ -19,7 +19,7 @@ Staff.create!(
 Staff.create!(
   id: 2,
   manager_id: 1,
-  email: "B@vcc.com",
+  email: "B@vcc.vn",
   name: "B",
   key_person: "3",
   department: "vccloud",
@@ -33,7 +33,7 @@ Staff.create!(
 Staff.create!(
   id: 3,
   manager_id: 2,
-  email: "C@vcc.com",
+  email: "C@vcc.vn",
   name: "C",
   key_person: "2",
   department: "vccloud",
@@ -46,7 +46,7 @@ Staff.create!(
 Staff.create!(
   id: 4,
   manager_id: 2,
-  email: "D@vcc.com",
+  email: "D@vcc.vn",
   name: "D",
   key_person: "2",
   department: "vccloud",
@@ -60,7 +60,7 @@ Staff.create!(
 Staff.create!(
   id: 5,
   manager_id: 4,
-  email: "E@vcc.com",
+  email: "E@vcc.vn",
   name: "E",
   key_person: "1",
   department: "vccloud",
@@ -74,7 +74,7 @@ Staff.create!(
 Staff.create!(
   id: 6,
   manager_id: 4,
-  email: "F@vcc.com",
+  email: "F@vcc.vn",
   name: "F",
   key_person: "1",
   department: "vccloud",
@@ -88,7 +88,7 @@ Staff.create!(
 Staff.create!(
   id: 7,
   manager_id: 4,
-  email: "G@vcc.com",
+  email: "G@vcc.vn",
   name: "G",
   key_person: "0",
   department: "vccloud",
@@ -102,7 +102,7 @@ Staff.create!(
 Staff.create!(
   id: 8,
   manager_id: 1,
-  email: "H@vcc.com",
+  email: "H@vcc.vn",
   name: "H",
   key_person: "3",
   department: "admicro",
@@ -115,7 +115,7 @@ Staff.create!(
 Staff.create!(
   id: 9,
   manager_id: 8,
-  email: "J@vcc.com",
+  email: "J@vcc.vn",
   name: "J",
   key_person: "2",
   department: "admicro",

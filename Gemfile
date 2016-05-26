@@ -39,6 +39,10 @@ gem 'carrierwave',             '0.10.0'
 gem 'mini_magick',             '3.8.0'
 #faker: make fake data
 gem 'faker',                   '1.4.2'
+# paginate: make paginate list
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 
 
 # Use Unicorn as the app server

@@ -1,6 +1,10 @@
 class PollsController < ApplicationController
+  def index
+  	@polls = Poll.paginate(page: params[:page])
+  end
+
   def show
-  	@list_poll = Poll.all
+    @poll = Poll.find(params[:id])
   end
 
   def new
