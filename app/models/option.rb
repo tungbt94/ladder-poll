@@ -16,7 +16,7 @@ class Option < ActiveRecord::Base
   end
 
   def get_sum_score
-    get_list_staff_voted
+    # self.get_list_staff_voted
     return @sum_score
   end
 end

@@ -9,7 +9,8 @@ class Staff < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }, allow_nil: true
+                    uniqueness: { case_sensitive: false },
+                    allow_nil: true
 
   # validates :validate_domain, on: :create
 
@@ -101,13 +102,20 @@ class Staff < ActiveRecord::Base
     end
   end
 
+  def self.exist(email)
+    if Staff.where(:email => email)
+      return true
+    end
+    return false
+  end
+
+  def self.get_id_by_email(email)
+    return Staff.where(:email => email.downcase).select(:id).take
+  end
+
   scope :get_staffs_managed_by, lambda {|id|
     where(["manager_id LIKE ?", "%#{id}%"])
   }
-
-  # def self.get_staffs_managed_by(id)
-  #   return Staff.where(:manager_id => id)
-  # end
 
   private
   # def validate_domain

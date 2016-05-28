@@ -1,0 +1,24 @@
+<!-- <li>
+  <%= option.content %>
+  score:<%= option.get_sum_score%>
+  staff:
+  <%staffs = option.get_list_staff_voted%>
+  <%staffs.each do |staff|%>
+    staff.name
+  <%end%>
+</li> -->
+<tr>
+  <td width=50%>
+    <%= option.content %>
+  </td>
+  <td width=20%>
+    score:<%= option.get_sum_score%>
+  </td>
+  <td width=30%>
+    staff:
+    <%staffs = option.get_list_staff_voted%>
+    <%staffs.each do |staff|%>
+      staff.name
+    <%end%>
+  </td>
+</tr>

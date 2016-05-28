@@ -145,7 +145,7 @@ end
     StaffPoll.create!(
       staff_id: staff_id,
       poll_id: poll_id,
-      option_id: 0
+      option_id: poll_id + Faker::Number.between(0,2)
     )
   end
 end

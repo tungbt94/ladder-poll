@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
 
 
+  get 'options/index'
+
+  get 'options/new'
+
+  get 'options/edit'
+
+  get 'options/delete'
+
   root to: "static_pages#welcome"
 
   resources :sessions, only: [:create, :destroy]
   resources :static_pages, only: [:welcome]
   resources :staffs
   resources :polls
+  resources :options
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

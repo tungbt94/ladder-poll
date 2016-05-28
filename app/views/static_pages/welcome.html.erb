@@ -8,7 +8,6 @@
   	<% if logged_in? %>
 		  Singed in as <strong><%= current_staff.name %></strong>!
       <% if current_staff_actived? %>
-		    <%= link_to "Create new poll!", poll_new_path, class: "btn btn-primary" %> or
         <%= link_to "Vote poll!", polls_index_path, class: "btn btn-primary" %>
       <% else %>
         Your account is not active, go to

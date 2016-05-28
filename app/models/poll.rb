@@ -3,8 +3,9 @@ class Poll < ActiveRecord::Base
   has_many :option
 
   def get_list_staff_voted
-    list_staff_poll = StaffPoll.where(:poll_id => self.id)
     list_staff = Array.new
+    list_staff_poll = StaffPoll.where(:poll_id => self.id)
+    puts "#{list_staff_poll.size}"
     list_staff_poll.each do |staff_poll|
       staff_id = staff_poll.staff_id
       list_staff.push(Staff.find(staff_id))
@@ -13,7 +14,8 @@ class Poll < ActiveRecord::Base
   end
 
   def get_list_option
-    list_option = Option.where(:poll_id => self.id)
+    # list_option = Option.where(:poll_id => self.id)
+    self.option
   end
 
 end
