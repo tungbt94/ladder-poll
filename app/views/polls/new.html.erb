@@ -1,2 +1,15 @@
-<h1>Polls#new</h1>
-<p>Find me in app/views/polls/new.html.erb</p>
+<h1>Add new poll</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @poll, url: {action: "create"}, method: "post" do |f| %>
+      <%= f.label :content %>
+      <%= f.text_field :content, class: 'form-control' %>
+
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+
+      <%= link_to "Cancel", "polls_index" , class: "btn btn-link" %>
+    <% end %>
+
+  </div>
+</div>

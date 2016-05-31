@@ -14,10 +14,14 @@ module SessionsHelper
 	 end
 
 	 def current_manager?
-	 	
+
 	 end
 	 # Returns true if the user is logged in, false otherwise.
 	 def logged_in?
 	   !current_staff.nil?
 	 end
+
+	#  def current_option(option)
+	# 	 session[:]
+	#  end
 end

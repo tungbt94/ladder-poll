@@ -18,4 +18,20 @@ class Poll < ActiveRecord::Base
     self.option
   end
 
+  # def vote(option)
+  #   StaffPoll.create(
+  #     staff_id: current_staff.id,
+  #     poll_id: self.id,
+  #     option_id: option.id
+  #   )
+  # end
+  #
+  # def unvote(option)
+  #   StaffPoll.where(
+  #     :staff_id => current_staff.id,
+  #     :poll_id => self.id,
+  #     :option_id => option.id
+  #   ).first.destroy
+  # end
+
 end

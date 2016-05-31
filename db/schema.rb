@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20160512040050) do
   add_index "options", ["id"], name: "index_options_on_id"
 
   create_table "polls", force: :cascade do |t|
-    t.string   "content",    null: false
     t.integer  "staff_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "content",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "polls", ["id"], name: "index_polls_on_id", unique: true

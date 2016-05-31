@@ -19,4 +19,8 @@ class Option < ActiveRecord::Base
     # self.get_list_staff_voted
     return @sum_score
   end
+
+  def get_poll
+    return Poll.find(self.poll_id)
+  end
 end

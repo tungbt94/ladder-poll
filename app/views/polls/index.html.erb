@@ -6,6 +6,9 @@
       <%= render @polls %>
     </ul>
     <%= will_paginate%>
+    <%= form_tag("/polls/new", method: "get") do %>
+      <%= submit_tag("Add") %>
+    <% end %>
 	<% else %>
   	<%= link_to "Sign in now!", "/auth/google_oauth2" , id: "sign_in", class: "btn btn-lg btn-primary" %>
   <% end %>

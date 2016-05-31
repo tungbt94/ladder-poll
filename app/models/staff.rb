@@ -113,6 +113,14 @@ class Staff < ActiveRecord::Base
     return Staff.where(:email => email.downcase).select(:id).take
   end
 
+  def voted?(option)
+    return true if StaffPoll.where(
+      :staff_id => self.id,
+      :option_id => option.id
+    ).first
+    return false
+  end
+
   scope :get_staffs_managed_by, lambda {|id|
     where(["manager_id LIKE ?", "%#{id}%"])
   }

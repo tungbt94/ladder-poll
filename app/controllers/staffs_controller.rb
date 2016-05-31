@@ -5,7 +5,8 @@ class StaffsController < ApplicationController
   end
 
   def show
-    @staff = Staff.find(params[:id])
+
+
   end
 
   def update
@@ -47,6 +48,8 @@ class StaffsController < ApplicationController
       return true
     end
   end
+
+
 
   private
    def staff_params

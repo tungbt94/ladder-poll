@@ -1,5 +1,6 @@
 <h1>Author: <%=Staff.find(@poll.staff_id).name%></h1>
-<h2><%=@poll.content%></h2>
+<h2><%= @poll.content %></h2>
+<% session[:poll_id] = @poll.id%>
 <table width=100%>
   <tr>
     <td width=50%>
@@ -12,24 +13,17 @@
       staff
     </td>
   </tr>
-  <% @options.each do |option| %>
+  <%= @options.each do |option| %>
     <tr>
-      <td width=50%>
-        <%= option.content %>
-      </td>
-      <td width=10%>
-        <%staffs = option.get_list_staff_voted%>
-        <%= option.get_sum_score%>
-      </td>
-      <td width=30%>
-        <%staffs.each do |staff|%>
-          staff.name
-        <%end%>
-      </td>
-      <td width=10%>
-        <%= check_box_tag(option.id) %>
-      </td>
+      <%= render option %>
     </tr>
   <% end %>
-
+  <% if @poll.staff_id == current_staff.id%>
+    <%= form_tag(option_new) do %>
+      <%= submit_tag("Add") %>
+    <% end %>
+    <%= form_tag(option_new) do %>
+      <%= submit_tag("Delete") %>
+    <% end %>
+  <% end %>
 </table>

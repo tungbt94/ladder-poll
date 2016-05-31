@@ -1,24 +1,19 @@
-<!-- <li>
+<td width=60%>
   <%= option.content %>
-  score:<%= option.get_sum_score%>
-  staff:
+</td>
+<td width=10%>
   <%staffs = option.get_list_staff_voted%>
+  <%= option.get_sum_score.to_i%>
+</td>
+<td width=20%>
   <%staffs.each do |staff|%>
-    staff.name
+    <%= staff.name %>
   <%end%>
-</li> -->
-<tr>
-  <td width=50%>
-    <%= option.content %>
-  </td>
-  <td width=20%>
-    score:<%= option.get_sum_score%>
-  </td>
-  <td width=30%>
-    staff:
-    <%staffs = option.get_list_staff_voted%>
-    <%staffs.each do |staff|%>
-      staff.name
-    <%end%>
-  </td>
-</tr>
+</td>
+<td width=10%>
+  <%if current_staff.voted?(option)%>
+    <%= render 'options/unvote'%>
+  <%else%>
+    <%= render 'options/vote'%>
+  <%end%>
+</td>

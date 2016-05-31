@@ -126,35 +126,18 @@ Staff.create!(
   oauth_token: "",
 )
 
-50.times do |i|
-  id = i
+5.times do |i|
+  poll_id = i
   content = "vote #{i}"
   staff_id = Faker::Number.between(1, 9)
   Poll.create!(
-    id: id,
+    id: poll_id,
     content: content,
     staff_id: staff_id
   )
-end
-
-9.times do |i|
-  staff_id = i
-  count = Faker::Number.between(0,50)
-  count.times do
-    poll_id = Faker::Number.between(0, 49)
-    StaffPoll.create!(
-      staff_id: staff_id,
-      poll_id: poll_id,
-      option_id: poll_id + Faker::Number.between(0,2)
-    )
-  end
-end
-
-option_id = 0
-50.times do |i|
-  poll_id   = i
-  number_option = Faker::Number.between(0, 5)
+  number_option = Faker::Number.between(1, 5)
   number_option.times do |n|
+    option_id = poll_id * 5 + n
     Option.create!(
       id: option_id,
       poll_id: poll_id,
@@ -162,6 +145,13 @@ option_id = 0
       created_at: "",
       updated_at: ""
     )
-    option_id += 1
+    number_staff_voted = Faker::Number.between(0, 8)
+    number_staff_voted.times do |s|
+      StaffPoll.create!(
+        staff_id: s+1,
+        poll_id: poll_id,
+        option_id: option_id
+      )
+    end
   end
 end
