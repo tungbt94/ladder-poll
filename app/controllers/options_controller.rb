@@ -4,6 +4,21 @@ class OptionsController < ApplicationController
   end
 
   def new
+    @option = Option.new
+  end
+
+  def create
+    binding.pry
+    poll_id = params[:option][:poll_id]
+    @option = Option.create!(
+      id: Option.last.id + 1,
+      content: params[:option][:content],
+      poll_id: poll_id,
+      created_at: "",
+      updated_at: ""
+    )
+    @poll = Poll.find_by_id(poll_id)
+    redirect_to(@poll)
   end
 
   def edit
@@ -12,19 +27,4 @@ class OptionsController < ApplicationController
   def delete
   end
 
-  def vote
-    StaffPoll.create(
-      staff_id: session[:user_id],
-      option_id: option.id,
-      poll_id: option.poll_id
-    )
-  end
-
-  def unvote
-    StaffPoll.where(
-      :staff_id => session[:user_id],
-      :option_id => option.id,
-      :poll_id => option.poll_id
-    ).first.destroy
-  end
 end

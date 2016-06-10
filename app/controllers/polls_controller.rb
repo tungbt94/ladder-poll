@@ -13,9 +13,10 @@ class PollsController < ApplicationController
   end
 
   def create
+    binding.pry
     @poll = Poll.create!(
       id: Poll.last.id + 1,
-      content: params.require(:poll).permit(:content).to_s,
+      content: params[:poll][:content],
       staff_id: session[:user_id],
       created_at: "",
       updated_at: ""
