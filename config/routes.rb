@@ -26,11 +26,4 @@ Rails.application.routes.draw do
   get 'poll_update', to: 'polls#update'
   get 'polls_index', to: 'polls#index'
 
-  get 'options/index'
-  get 'options/new'
-  get 'options/edit'
-  get 'options/delete'
-  post 'option_vote', to: 'options#vote'
-  post 'option_unvote', to:'options#unvote'
-
 end

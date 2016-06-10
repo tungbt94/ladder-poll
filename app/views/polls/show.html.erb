@@ -1,6 +1,7 @@
 <h1>Author: <%=Staff.find(@poll.staff_id).name%></h1>
 <h2><%= @poll.content %></h2>
 <% session[:poll_id] = @poll.id%>
+<%= form_for @poll, url:{action: "update"}, method:"put" do |f|%>
 <table width=100%>
   <tr>
     <td width=50%>
@@ -13,17 +14,14 @@
       staff
     </td>
   </tr>
-  <%= @options.each do |option| %>
+  <% @options.each_with_index do |option, index| %>
     <tr>
-      <%= render option %>
+      <%= render option, index: index %>
     </tr>
   <% end %>
-  <% if @poll.staff_id == current_staff.id%>
-    <%= form_tag(option_new) do %>
-      <%= submit_tag("Add") %>
-    <% end %>
-    <%= form_tag(option_new) do %>
-      <%= submit_tag("Delete") %>
-    <% end %>
-  <% end %>
 </table>
+  <%= f.submit "Vote", class: "btn btn-primary"%>
+<% end %>
+<% if @poll.staff_id == current_staff.id%>
+  <%= link_to "Add", new_option_path, class: "btn btn-primary" %>
+<% end %>

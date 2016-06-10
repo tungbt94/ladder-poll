@@ -12,8 +12,8 @@
 </td>
 <td width=10%>
   <%if current_staff.voted?(option)%>
-    <%= render 'options/unvote'%>
+    <%= check_box_tag "poll[options][#{index}]", option.id, true %>
   <%else%>
-    <%= render 'options/vote'%>
+    <%= check_box_tag "poll[options][#{index}]", option.id, false %>
   <%end%>
 </td>

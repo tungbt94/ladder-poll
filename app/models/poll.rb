@@ -13,25 +13,13 @@ class Poll < ActiveRecord::Base
     return list_staff
   end
 
-  def get_list_option
-    # list_option = Option.where(:poll_id => self.id)
-    self.option
+  def get_list_option_id
+    list_id = Array.new()
+    self.option.each do |option|
+      list_id.push(option.id)
+    end
+    return list_id
   end
 
-  # def vote(option)
-  #   StaffPoll.create(
-  #     staff_id: current_staff.id,
-  #     poll_id: self.id,
-  #     option_id: option.id
-  #   )
-  # end
-  #
-  # def unvote(option)
-  #   StaffPoll.where(
-  #     :staff_id => current_staff.id,
-  #     :poll_id => self.id,
-  #     :option_id => option.id
-  #   ).first.destroy
-  # end
 
 end

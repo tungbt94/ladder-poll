@@ -5,7 +5,7 @@
     <%= form_for @poll, url: {action: "create"}, method: "post" do |f| %>
       <%= f.label :content %>
       <%= f.text_field :content, class: 'form-control' %>
-
+    </br>
       <%= f.submit "Submit", class: "btn btn-primary" %>
 
       <%= link_to "Cancel", "polls_index" , class: "btn btn-link" %>
