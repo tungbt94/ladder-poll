@@ -1,8 +1,8 @@
-<tr width=80%>
-  <td width=60%>
+<tr width=100%>
+  <td>
     <%= link_to poll.content, poll %>
   </td>
-  <td width=40%>
+  <td>
     <% author = Staff.find(poll.staff_id)%>
     <%= link_to author.name, author%>
   </td>

@@ -5,7 +5,7 @@
     <%= form_for @option, url: {action: "create"}, method: "post" do |f| %>
       <%= f.label :content %>
       <%= f.text_field :content, class: 'form-control' %>
-    </br>
+      <%= f.hidden_field :poll_id, :value => params[:poll_id] %>
       <%= f.submit "Submit", class: "btn btn-primary" %>
 
       <%= link_to "Cancel", "polls_index" , class: "btn btn-link" %>

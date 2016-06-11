@@ -29,18 +29,22 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     if  params[:poll]
       checked_options = params[:poll][:options].values
+      checked_options = checked_options.map(&:to_i)
       if params[:commit] == 'Vote'
-        vote(poll, checked_options)
+        vote(@poll, checked_options)
       elsif params[:commit] == 'Delete'
-
+        delete(@poll,checked_options)
       end
+      redirect_to(@poll)
+    else
+      flash[:warning] = "0 option is selected"
       redirect_to(@poll)
     end
   end
 
   def vote(poll, checked_options)
     checked_options.each do |option_id|
-      if StaffPoll.exist(session[:user_id], option_id)
+      unless StaffPoll.exist(session[:user_id], option_id)
         StaffPoll.create(session[:user_id], poll.id, option_id)
       end
     end
@@ -52,4 +56,10 @@ class PollsController < ApplicationController
     end
   end
 
+  def delete(poll, checked_options)
+    checked_options.each do |option_id|
+      Option.destroy(option_id)
+      StaffPoll.destroy(option_id)
+    end
+  end
 end

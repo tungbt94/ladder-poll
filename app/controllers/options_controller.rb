@@ -8,7 +8,7 @@ class OptionsController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     poll_id = params[:option][:poll_id]
     @option = Option.create!(
       id: Option.last.id + 1,

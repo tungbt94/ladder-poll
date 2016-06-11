@@ -22,7 +22,7 @@
 </table>
   <%= f.submit "Vote", class: "btn btn-primary"%>
   <%= f.submit "Delete", class: "btn btn-primary"%>
-<% end %>
-<% if @poll.staff_id == current_staff.id%>
+  <% if @poll.staff_id == current_staff.id%>
   <%= link_to "Add", new_option_path(:poll_id => @poll.id), class: "btn btn-primary" %>
+  <% end %>
 <% end %>
