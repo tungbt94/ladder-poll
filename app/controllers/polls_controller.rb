@@ -62,4 +62,10 @@ class PollsController < ApplicationController
       StaffPoll.destroy(option_id)
     end
   end
+
+  def destroy(poll_id)
+    Poll.destroy(poll_id)
+    Option.destroy(poll_id)
+    StaffPoll.destroy(poll_id)
+  end
 end

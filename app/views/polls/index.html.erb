@@ -2,9 +2,13 @@
 <h1>All Poll</h1>
   <% if current_staff%>
     <%= will_paginate%>
-    <ul class="polls">
-      <%= render @polls %>
-    </ul>
+    <table width=100%>
+      <% @polls.each do |poll|%>
+        <tr>
+          <%= render poll%>
+        </tr>
+      <% end %>
+    </table>
     <%= will_paginate%>
     <%= form_tag("/polls/new", method: "get") do %>
       <%= submit_tag("Add") %>
