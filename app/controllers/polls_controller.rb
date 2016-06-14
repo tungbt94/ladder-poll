@@ -33,7 +33,7 @@ class PollsController < ApplicationController
       if params[:commit] == 'Vote'
         vote(@poll, checked_options)
       elsif params[:commit] == 'Delete'
-        delete(@poll,checked_options)
+        delete_option(@poll,checked_options)
       end
       redirect_to(@poll)
     else
@@ -56,16 +56,17 @@ class PollsController < ApplicationController
     end
   end
 
-  def delete(poll, checked_options)
+  def delete_option(poll, checked_options)
     checked_options.each do |option_id|
       Option.destroy(option_id)
       StaffPoll.destroy(option_id)
     end
   end
 
-  def destroy(poll_id)
+  def destroy
+    poll_id = params[:poll_id]
+    binding.pry
     Poll.destroy(poll_id)
-    Option.destroy(poll_id)
-    StaffPoll.destroy(poll_id)
+    redirect_to(:action => 'index')
   end
 end

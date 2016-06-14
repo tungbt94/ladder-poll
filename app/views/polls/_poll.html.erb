@@ -7,6 +7,6 @@
 </td>
 <td width=10%>
   <% if current_staff.id == poll.staff_id %>
-  <%= link_to "Delete",  class: "btn btn-primary" %>
+    <%= link_to "Delete", polls_destroy_path(:poll_id => poll.id) , class: "btn btn-primary" %>
   <% end %>
 </td>

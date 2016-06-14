@@ -8,7 +8,7 @@
   	<% if logged_in? %>
 		  Singed in as <strong><%= current_staff.name %></strong>!
       <% if current_staff_actived? %>
-        <%= link_to "Vote poll!", polls_index_path, class: "btn btn-primary" %>
+        <%= link_to "Vote poll!", polls_path, class: "btn btn-primary" %>
       <% else %>
         Your account is not active, go to
         <%= link_to "Settings", staff_edit_path, class: "btn btn-link" %>

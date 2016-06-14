@@ -21,5 +21,10 @@ class Poll < ActiveRecord::Base
     return list_id
   end
 
-
+  def self.destroy(poll_id)
+    poll = Poll.find(poll_id)
+    poll.option.destroy
+    poll.destroy
+    poll.staff_polls.destroy
+  end
 end
