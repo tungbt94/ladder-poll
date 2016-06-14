@@ -1,20 +1,32 @@
 class StaffsController < ApplicationController
   LISTDOMAIN = ["vccloud.vn", "vcc.vn", "admicro.vn"]
+
+  def index
+  	@staffs = Staff.paginate(page: params[:page])
+  end
+
   def edit
   	@staff = Staff.find(session[:user_id])
   end
 
   def show
-
-
+    @staff = Staff.find(params[:id])
   end
 
   def update
+    if params[:commit] == 'Update key'
+      update_key_person
+    elsif params[:commit] == 'Save changes'
+      update_profile
+    end
+  end
+
+  def update_profile
     @staff = Staff.find(session[:user_id])
     if manager_email_exist
       if @staff.update_attributes(staff_params)
-        # Handle a successful update.
-          @staff.update_attributes(actived: true)
+          manager_email = params.require(:staff).permit(:manager_id).to_s.downcase!
+          @staff.update_profile(manager_email)
           flash[:success] = "Profile updated"
       else
         flash[:alert] = "manager email not exist"
@@ -49,7 +61,11 @@ class StaffsController < ApplicationController
     end
   end
 
-
+  def update_key_person
+    @staff = Staff.find(params[:id])
+    @staff.set_key_person(params[:staff][:key_person])
+    redirect_to @staff
+  end
 
   private
    def staff_params

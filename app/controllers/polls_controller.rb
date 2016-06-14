@@ -13,7 +13,6 @@ class PollsController < ApplicationController
   end
 
   def create
-    binding.pry
     @poll = Poll.create!(
       id: Poll.last.id + 1,
       content: params[:poll][:content],
@@ -25,7 +24,6 @@ class PollsController < ApplicationController
   end
 
   def update
-    # binding.pry
     @poll = Poll.find(params[:id])
     if  params[:poll]
       checked_options = params[:poll][:options].values
@@ -65,7 +63,6 @@ class PollsController < ApplicationController
 
   def destroy
     poll_id = params[:poll_id]
-    binding.pry
     Poll.destroy(poll_id)
     redirect_to(:action => 'index')
   end

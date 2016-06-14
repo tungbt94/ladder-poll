@@ -121,6 +121,20 @@ class Staff < ActiveRecord::Base
     return false
   end
 
+  def set_key_person(key_person)
+    staff = Staff.find(self.id)
+    staff.update!(:key_person => key_person)
+  end
+
+  def update_profile(manager_email)
+    staff = Staff.find(self.id)
+    manager_id = Staff.where(:email => manager_email).first.id
+    staff.update!(
+      :manager_id => manager_id,
+      :actived => true
+    )
+  end
+
   scope :get_staffs_managed_by, lambda {|id|
     where(["manager_id LIKE ?", "%#{id}%"])
   }

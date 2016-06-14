@@ -126,6 +126,76 @@ Staff.create!(
   oauth_token: "",
 )
 
+Staff.create!(
+  id: 11,
+  manager_id: 10,
+  email: "staff_11@vcc.vn",
+  name: "staff_11",
+  key_person: "0",
+  department: "vcc",
+  division: "vccloud",
+  actived: true,
+  provider: "",
+  uid: "",
+  oauth_token: "",
+)
+
+Staff.create!(
+  id: 12,
+  manager_id: 10,
+  email: "staff_12@vcc.vn",
+  name: "staff_12",
+  key_person: "0",
+  department: "vcc",
+  division: "vccloud",
+  actived: true,
+  provider: "",
+  uid: "",
+  oauth_token: "",
+)
+
+Staff.create!(
+  id: 13,
+  manager_id: 11,
+  email: "staff_13@vcc.vn",
+  name: "staff_13",
+  key_person: "0",
+  department: "vcc",
+  division: "vccloud",
+  actived: true,
+  provider: "",
+  uid: "",
+  oauth_token: "",
+)
+
+Staff.create!(
+  id: 14,
+  manager_id: 11,
+  email: "staff_14@vcc.vn",
+  name: "staff_14",
+  key_person: "0",
+  department: "vcc",
+  division: "vccloud",
+  actived: true,
+  provider: "",
+  uid: "",
+  oauth_token: "",
+)
+
+Staff.create!(
+  id: 15,
+  manager_id: 13,
+  email: "staff_15@vcc.vn",
+  name: "staff_15",
+  key_person: "0",
+  department: "vcc",
+  division: "vccloud",
+  actived: true,
+  provider: "",
+  uid: "",
+  oauth_token: "",
+)
+
 5.times do |i|
   poll_id = i
   content = "vote #{i}"
