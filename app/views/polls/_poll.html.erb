@@ -6,7 +6,7 @@
   <%= link_to author.name, author%>
 </td>
 <td width=10%>
-  <% if current_staff.id == poll.staff_id %>
+  <% if current_staff.id == poll.staff_id && current_staff.actived %>
     <%= link_to "Delete", polls_destroy_path(:poll_id => poll.id) , class: "btn btn-primary" %>
   <% end %>
 </td>
