@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
 
   get 'static_pages_home', to: 'static_pages#home'
+  get 'static_pages_login', to: 'static_pages#login'
 
   get 'staff_edit', to: 'staffs#edit'
+  get 'staff_login', to: 'staffs#login'
   # get 'staff_show', to: 'staffs#show'
   # get 'staff_index', to: 'staffs#index'
 

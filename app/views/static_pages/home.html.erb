@@ -15,6 +15,6 @@
         to active account!
       <% end %>
 	  <% else %>
-  		<%= link_to "Sign in now!", "/auth/google_oauth2" , id: "sign_in", class: "btn btn-lg btn-primary" %>
+  		<%= link_to "Sign in", static_pages_login_path, class: "btn btn-primary"%>
   	<% end %>
 </div>
