@@ -1,2 +1,20 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="center jumbotron">
+  <h1>Welcome to the Ladder Poll</h1>
+  <h2>
+    This is the home page for the
+    <a href="http://www.railstutorial.org/">Ladder Poll</a>
+   application.
+  </h2>
+  	<% if logged_in? %>
+		  Singed in as <strong><%= current_staff.name %></strong>!
+      <% if current_staff_actived? %>
+        <%= link_to "Vote poll!", polls_path, class: "btn btn-primary" %>
+      <% else %>
+        Your account is not active, go to
+        <%= link_to "Settings", staff_edit_path, class: "btn btn-link" %>
+        to active account!
+      <% end %>
+	  <% else %>
+  		<%= link_to "Sign in now!", "/auth/google_oauth2" , id: "sign_in", class: "btn btn-lg btn-primary" %>
+  	<% end %>
+</div>

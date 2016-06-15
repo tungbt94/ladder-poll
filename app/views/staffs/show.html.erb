@@ -1,6 +1,7 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
+      <%= image_tag @staff.avatar.url(:medium) %>
       <h1><%= @staff.name %></h1>
       <h4><%= @staff.email %></h4>
       <h4><%= @staff.department %></h2>
@@ -8,6 +9,7 @@
     </section>
   </aside>
 </div>
+
 <% if current_staff.get_branch.include?(@staff) && current_staff.get_manager_level >= 3 %>
   <%= form_for(@staff) do |f|%>
     <p>Update key person for this staff</p>

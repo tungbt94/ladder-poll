@@ -12,17 +12,41 @@ class Staff < ActiveRecord::Base
                     uniqueness: { case_sensitive: false },
                     allow_nil: true
 
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" },
+                    default_url: "/default/user/avatar/:style/missing.png",
+                    url: "/images/user/avatar/:style/:hash:extension",
+                    path: ':rails_root/public:url'
+
+  validates_attachment_presence :avatar
+
+  validates_attachment_file_name :avatar, :matches => [/jpeg\Z/, /jpg\Z/, /png\Z/]
+
+  do_not_validate_attachment_file_type :avatar
+
+  # interpolate in paperclip
+  Paperclip.interpolates :hash  do |staff, style|
+    staff.instance.uid.downcase
+  end
+
+  Paperclip.interpolates :extension  do |staff, style|
+    File.extname(staff.instance.attachment_file_name) || ".jpg" rescue ".jpg"
+  end
+
   # validates :validate_domain, on: :create
 
   def self.from_omniauth(auth)
-		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |staff|
-	    staff.provider = auth.provider
-	    staff.uid = auth.uid
-	    staff.name = auth.info.name
-	    staff.oauth_token = auth.credentials.token
-	    staff.save!
-	  end
+		staff = where(provider: auth.provider, uid: auth.uid).first
+    staff = Staff.new if staff.nil?
+    staff.provider = auth.provider
+    staff.uid = auth.uid
+    staff.name = auth.info.name
+    staff.oauth_token = auth.credentials.token
+    staff.avatar = auth.info.image
+    staff.save!
+    return staff
 	end
+
+
 
 	def set_active
 		# self.update_attributes(actived: true)

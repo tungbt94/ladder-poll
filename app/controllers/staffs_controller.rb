@@ -2,7 +2,7 @@ class StaffsController < ApplicationController
   LISTDOMAIN = ["vccloud.vn", "vcc.vn", "admicro.vn"]
 
   def index
-  	@staffs = Staff.paginate(page: params[:page])
+  	@staffs = Staff.all.page(params[:page]).per_page(10)
   end
 
   def edit

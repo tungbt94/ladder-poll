@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512040050) do
+ActiveRecord::Schema.define(version: 20160615090320) do
 
   create_table "options", force: :cascade do |t|
     t.integer  "poll_id"
@@ -40,18 +40,22 @@ ActiveRecord::Schema.define(version: 20160512040050) do
   end
 
   create_table "staffs", force: :cascade do |t|
-    t.integer  "manager_id",  default: 0
+    t.integer  "manager_id",          default: 0
     t.string   "email"
     t.string   "name"
-    t.integer  "key_person",  default: 0
+    t.integer  "key_person",          default: 0
     t.string   "department"
     t.string   "division"
-    t.boolean  "actived",     default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.boolean  "actived",             default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "staffs", ["id"], name: "index_staffs_on_id", unique: true

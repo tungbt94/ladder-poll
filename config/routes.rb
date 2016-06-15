@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  root to: "static_pages#welcome"
+  root to: "static_pages#home"
 
   resources :sessions, only: [:create, :destroy]
-  resources :static_pages, only: [:welcome]
+  resources :static_pages, only: [:home]
   resources :staffs
   resources :polls
   resources :options
