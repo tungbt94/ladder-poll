@@ -36,8 +36,6 @@ class Staff < ActiveRecord::Base
     File.extname(staff.instance.attachment_file_name) || ".jpg" rescue ".jpg"
   end
 
-  # validates :validate_domain, on: :create
-
   def self.from_omniauth(auth)
 		staff = where(provider: auth.provider, uid: auth.uid).first
     staff = Staff.new if staff.nil?
@@ -177,12 +175,6 @@ class Staff < ActiveRecord::Base
   }
 
   private
-  # def validate_domain
-  #   self.email.split("@")
-  # end
-
-
-
 
   # get max manager_level of array staff
   def self.max_manager_level(staffs)
