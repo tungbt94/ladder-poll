@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  LISTDOMAIN = ["vccloud.vn", "vcc.vn", "admicro.vn", "gmail.com"]
+  # LISTDOMAIN = ["vccloud.vn", "vcc.vn", "admicro.vn", "gmail.com"]
 
   def index
   	@staffs = Staff.all.page(params[:page]).per_page(10)
@@ -46,21 +46,19 @@ class StaffsController < ApplicationController
     end
   end
 
-  # verify email
-  def verify_email
-    # email = params.require(:staff).permit(:email).to_s.downcase!
-    email = params[:email].to_s.downcase!
-    if email
-      domain = email.split('@').last
-      if LISTDOMAIN.include?(domain)
-        return true
-      end
-      flash[:error] = "domain is not exist"
-    else
-      flash[:error] = "email is nil"
-      return true
-    end
-  end
+  # # verify email
+  # def verify_email
+  #   # email = params.require(:staff).permit(:email).to_s.downcase!
+  #   email = params[:email].to_s.downcase!
+  #   if email
+  #     domain = email.split('@').last
+  #     if LISTDOMAIN.include?(domain)
+  #       return true
+  #     end
+  #     flash[:error] = "domain is not exist or email is nil"
+  #   end
+  #   return false
+  # end
 
   def update_key_person
     @staff = Staff.find(params[:id])
@@ -69,11 +67,7 @@ class StaffsController < ApplicationController
   end
 
   def login
-    binding.pry
-    if verify_email
-      # 
-    end
-    redirect_to root_path
+    @staff = Staff.new
   end
 
   private

@@ -6,11 +6,15 @@ class Staff < ActiveRecord::Base
 				}
   validates :name, presence: true, length: { maximum: 50 }
   # VALID_EMAIL_REGEX = /\A[\w+\-.]+@vccloud.vn/i
+
+  LISTDOMAIN = ["vccloud.vn", "vcc.vn", "admicro.vn", "gmail.com"]
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false },
                     allow_nil: true
+
+  validate :email_domain_check
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" },
                     default_url: "/default/user/avatar/:style/missing.png",
@@ -40,6 +44,7 @@ class Staff < ActiveRecord::Base
     staff.provider = auth.provider
     staff.uid = auth.uid
     staff.name = auth.info.name
+    staff.email = auth.info.email
     staff.oauth_token = auth.credentials.token
     staff.avatar = auth.info.image
     staff.save!
@@ -159,6 +164,14 @@ class Staff < ActiveRecord::Base
     )
   end
 
+  def email_domain_check
+    domain = self.email.split("@").last
+    binding.pry
+    errors.add(:base, 'domain not exist') unless LISTDOMAIN.include?(domain)
+    return true if LISTDOMAIN.include?(domain)
+    return false
+  end
+
   scope :get_staffs_managed_by, lambda {|id|
     where(["manager_id LIKE ?", "%#{id}%"])
   }
@@ -167,6 +180,9 @@ class Staff < ActiveRecord::Base
   # def validate_domain
   #   self.email.split("@")
   # end
+
+
+
 
   # get max manager_level of array staff
   def self.max_manager_level(staffs)
