@@ -16,7 +16,7 @@ class Staff < ActiveRecord::Base
 
   validate :email_domain_check
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" },
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "80x80>" },
                     default_url: "/default/user/avatar/:style/missing.png",
                     url: "/images/user/avatar/:style/:hash:extension",
                     path: ':rails_root/public:url'
@@ -164,7 +164,6 @@ class Staff < ActiveRecord::Base
 
   def email_domain_check
     domain = self.email.split("@").last
-    binding.pry
     errors.add(:base, 'domain not exist') unless LISTDOMAIN.include?(domain)
     return true if LISTDOMAIN.include?(domain)
     return false
